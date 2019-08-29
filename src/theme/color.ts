@@ -1,0 +1,22 @@
+export const Colors = {
+			primary: '#EBEBEB',
+			secondary: '#216583',
+			accent: '#f7be16',
+			turquoise: '#00818a',
+			stormGray: '#717279',
+			texasRose: '#FCAF58',
+			tinklePink: '#FD87B7',
+			lightGreen: '#9CE97D',
+			mayaBlue: '#86A6FC',
+			dodgerBlue: '#4D7CFE',
+			atlantisGreen: '#6ED130',
+			background: '#EEEEEE',
+			purple: '#413A7E',
+			white: 'white',
+			gradient: {
+				purple_white: ['#988DDD', '#413A7E'],
+				white: ['#FFFFFF', '#FFFFFF'],
+				red_white: ['#f44336', '#b71c1c'],
+				cyan_white: ['#43a047', '#1b5e20'],
+    },
+		};
