@@ -54,10 +54,12 @@ export const taskReducer = (
 		case RootActionKeys.restore:
 			const { task } = payload as IRootState;
 			return {
-                ...state,
-                items: { ...state.items, ...task.items },
-                sharedItems: { ...state.sharedItems, ...task.sharedItems },
+				...state,
+				items: { ...state.items, ...task.items },
+				sharedItems: { ...state.sharedItems, ...task.sharedItems },
 			};
+		case 'RESET_APP':
+			return initalState;
 		default:
 			return state;
 	}

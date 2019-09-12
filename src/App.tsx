@@ -22,9 +22,15 @@ import { PersistGate } from 'redux-persist/integration/react';
 import FlashMessage from 'react-native-flash-message';
 import { IRootState, RootActionKeys } from './core/types';
 import _ from 'lodash';
-import { View, AppState, Linking } from 'react-native';
+import { View, AppState, Linking, Dimensions } from 'react-native';
 import { TaskActionKeys, TaskyShare, selectAllTask } from './core/modules';
-import { Firebase } from 'react-native-firebase';
+import firebase, { Firebase } from 'react-native-firebase';
+import {AdmobConfig} from './constants'
+import { BannerAds } from './modules/components/BannerAd';
+
+const width = Dimensions.get('screen').width;
+
+
 function App() {
 	return (
 		<Provider store={store}>
@@ -89,7 +95,7 @@ function AppDelegate(props: { children: any }) {
 	const _handleDeeplink = (event: { url: string }) => {
 		FirebaseDatabase.getInstance().handleDeeplink(event.url);
 		FirebaseDatabase.getInstance().handleDeeplinkRestore(event.url);
-	}
+	};
 
 	useEffect(() => {
 		console.log('re_render');
@@ -104,16 +110,22 @@ function AppDelegate(props: { children: any }) {
 				remove: removeShareTask,
 			},
 			appDispatch: {
-				restore: onRestoreState
-			}
+				restore: onRestoreState,
+			},
 		});
+		// showAdmob()
 
 		Linking.addEventListener('url', _handleDeeplink);
 		return () => {
-			Linking.removeListener('url', _handleDeeplink)
-		}
+			Linking.removeListener('url', _handleDeeplink);
+		};
 	}, []);
-	return <View style={{ flex: 1 }}>{props.children}</View>;
+	return (
+		<View style={{ flex: 1 }}>
+			{props.children}
+			<BannerAds width={width} height={60} />
+		</View>
+	);
 }
 
 export default App;

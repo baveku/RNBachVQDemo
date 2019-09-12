@@ -62,7 +62,9 @@ export const categoryReducer = (
 			};
 		case RootActionKeys.restore:
 			const { category } = payload as IRootState;
-			return {...state, items: {...state.items, ...category.items}, numOfUrgent: category.numOfUrgent}
+			return { ...state, items: { ...state.items, ...category.items }, numOfUrgent: category.numOfUrgent }
+		case 'RESET_APP':
+			return initalState
 		default:
 			return state;
 	}

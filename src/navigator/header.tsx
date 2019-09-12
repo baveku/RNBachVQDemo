@@ -7,15 +7,12 @@ import {
 	MaterialIconKeys,
 	flashMessageAlert,
 } from '../packages';
-import { ITasky, getColorOfTask } from '../modules/models/task';
 import { useNavigation } from 'react-navigation-hooks';
 import { MainStackRouterName } from './nav';
 import OctIcon from 'react-native-vector-icons/Octicons';
 import { Colors } from '../theme';
 import { useSelector } from 'react-redux';
 import { selectNote, selectCategory } from '../core/modules';
-import { FirebaseDeepLink } from '../core';
-import firebase from 'react-native-firebase';
 import { View, ActivityIndicator, Clipboard } from 'react-native';
 import Share from 'react-native-share';
 import { shareCard } from '../functions';
@@ -37,9 +34,11 @@ export const ShareIcon = (props: { id: string }) => {
 				title: 'Share Card',
 				url: url,
 			})
-				.then(openReturn => {})
+				.then(openReturn => {
+					// showAdmob()
+				})
 				.catch(err => {
-					flashMessageAlert('ERROR', err.message);
+					// flashMessage?Alert('ERROR', err.message);
 				});
 		} catch (err) {
 			console.log(err);

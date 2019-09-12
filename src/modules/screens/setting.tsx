@@ -19,18 +19,25 @@ import { purgeStoredState } from 'redux-persist';
 import { persistConfig } from '../../core';
 import firebase from 'react-native-firebase';
 import { BText } from '../components';
+import { useDispatch } from 'react-redux';
+import { flashMessageAlert } from '../../packages';
 
 type SectionDataItem = { label: string; onAction?: any };
 type Section = { title: string; data: string[] };
 
 export function SettingScreen() {
-	const { navigate } = useNavigation();
+	const { navigate, popToTop } = useNavigation();
+	const dispatch = useDispatch();
+
+	const onResetApp = useCallback(() => {
+		dispatch({ type: 'RESET_APP' }) && popToTop();
+	}, [dispatch])
 
 	const clearData = () => {
 		const clean = () => {
-			purgeStoredState(persistConfig);
+			onResetApp()
 			firebase.notifications().cancelAllNotifications();
-			firebase.crashlytics().crash();
+			flashMessageAlert('Alert', 'Tasky has reset.');
 		};
 		const alertButton: AlertButton[] = [
 			{
@@ -46,7 +53,7 @@ export function SettingScreen() {
 
 		Alert.alert(
 			'Do you want to reset all data?',
-			'Please backup data before resetting',
+			'Please backup data before resetting.',
 			alertButton
 		);
 	};

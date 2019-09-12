@@ -33,6 +33,8 @@ export const settingReducer = (
 			return {
 				...setting,
 			};
+		case 'RESET_APP':
+			return initalState;
 		default:
 			return state;
 	}

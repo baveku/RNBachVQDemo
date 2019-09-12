@@ -34,6 +34,7 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import { RepeatType } from 'react-native-push-notification';
 import firebase from 'react-native-firebase';
 import { BText } from '../components/BText';
+import { showAdmob } from '../../functions';
 
 export function TaskScreen() {
 	const { navigate, setParams, goBack, replace } = useNavigation();
@@ -53,6 +54,10 @@ export function TaskScreen() {
 				: allCategory[0].id
 		)
 	);
+
+	useEffect(() => {
+		// showAdmob()
+	}, [])
 
 	const [onUpdate, onRemove] = useActionTask(currentItem.id);
 
@@ -479,6 +484,8 @@ const styles = StyleSheet.create({
 		color: Colors.white,
 		fontSize: 16,
 		fontWeight: '700',
+		width: '100%',
+		textAlign: 'center'
 	},
 	urgentView: {
 		height: 40,
